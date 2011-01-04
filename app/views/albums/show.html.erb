@@ -1,0 +1,30 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "Images")}", albums_path  %></li>
+     <% if can? :update, @album %>
+	 <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_album_path %></li>
+      <% end %>
+	  <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", album_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.album.image", :default => t("activerecord.labels.image", :default => "")) %></b>
+          <img src="<%=@album.image.url%>" width="200" height="200" /><br />
+        </p>
+
+       
+      <div class="wat-cf">
+	  <% if can? :update,@album %>
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_album_path(@album), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", album_path(@album), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+     <% end %>
+	 </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

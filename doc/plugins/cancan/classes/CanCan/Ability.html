@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: CanCan::Ability</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">CanCan::Ability</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/cancan/lib/cancan/ability_rb.html">
+                vendor/plugins/cancan/lib/cancan/ability.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This module is designed to be included into an <a
+href="Ability.html">Ability</a> class. This will provide the &quot;<a
+href="Ability.html#M000003">can</a>&quot; methods for defining and checking
+abilities.
+</p>
+<pre>
+  class Ability
+    include CanCan::Ability
+
+    def initialize(user)
+      if user.admin?
+        can :manage, :all
+      else
+        can :read, :all
+      end
+    end
+  end
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000005">alias_action</a>&nbsp;&nbsp;
+      <a href="#M000006">aliased_actions</a>&nbsp;&nbsp;
+      <a href="#M000011">attributes_for</a>&nbsp;&nbsp;
+      <a href="#M000009">authorize!</a>&nbsp;&nbsp;
+      <a href="#M000003">can</a>&nbsp;&nbsp;
+      <a href="#M000001">can?</a>&nbsp;&nbsp;
+      <a href="#M000004">cannot</a>&nbsp;&nbsp;
+      <a href="#M000002">cannot?</a>&nbsp;&nbsp;
+      <a href="#M000007">clear_aliased_actions</a>&nbsp;&nbsp;
+      <a href="#M000012">has_block?</a>&nbsp;&nbsp;
+      <a href="#M000013">has_raw_sql?</a>&nbsp;&nbsp;
+      <a href="#M000008">query</a>&nbsp;&nbsp;
+      <a href="#M000010">unauthorized_message</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="#M000005" class="method-signature">
+          <span class="method-name">alias_action</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias one or more actions into another one.
+</p>
+<pre>
+  alias_action :update, :destroy, :to =&gt; :modify
+  can :modify, Comment
+</pre>
+<p>
+Then :modify permission will apply to both :update and :destroy requests.
+</p>
+<pre>
+  can? :update, Comment # =&gt; true
+  can? :destroy, Comment # =&gt; true
+</pre>
+<p>
+This only works in one direction. Passing the aliased action into the
+&quot;<a href="Ability.html#M000001">can?</a>&quot; call will not work
+because aliases are meant to generate more generic actions.
+</p>
+<pre>
+  alias_action :update, :destroy, :to =&gt; :modify
+  can :update, Comment
+  can? :modify, Comment # =&gt; false
+</pre>
+<p>
+Unless that exact alias is used.
+</p>
+<pre>
+  can :modify, Comment
+  can? :modify, Comment # =&gt; true
+</pre>
+<p>
+The following aliases are added by default for conveniently mapping common
+controller actions.
+</p>
+<pre>
+  alias_action :index, :show, :to =&gt; :read
+  alias_action :new, :to =&gt; :create
+  alias_action :edit, :to =&gt; :update
+</pre>
+<p>
+This way one <a href="Ability.html#M000003">can</a> use params[:action] in
+the controller to determine the permission.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 173</span>
+173:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alias_action</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+174:       <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>[<span class="ruby-identifier">:to</span>]
+175:       <span class="ruby-identifier">aliased_actions</span>[<span class="ruby-identifier">target</span>] <span class="ruby-operator">||=</span> []
+176:       <span class="ruby-identifier">aliased_actions</span>[<span class="ruby-identifier">target</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">args</span>
+177:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="#M000006" class="method-signature">
+          <span class="method-name">aliased_actions</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a hash of aliased actions. The key is the target and the value is
+an array of actions aliasing the key.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 180</span>
+180:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aliased_actions</span>
+181:       <span class="ruby-ivar">@aliased_actions</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">default_alias_actions</span>
+182:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="#M000011" class="method-signature">
+          <span class="method-name">attributes_for</span><span class="method-args">(action, subject)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000011-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 216</span>
+216:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attributes_for</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+217:       <span class="ruby-identifier">attributes</span> = {}
+218:       <span class="ruby-identifier">relevant_can_definitions</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">can_definition</span><span class="ruby-operator">|</span>
+219:         <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">can_definition</span>.<span class="ruby-identifier">attributes_from_conditions</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">can_definition</span>.<span class="ruby-identifier">base_behavior</span>
+220:       <span class="ruby-keyword kw">end</span>
+221:       <span class="ruby-identifier">attributes</span>
+222:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="#M000009" class="method-signature">
+          <span class="method-name">authorize!</span><span class="method-args">(action, subject, *args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+See ControllerAdditions#authorize! for documentation.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 197</span>
+197:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">authorize!</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+198:       <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>
+199:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:message</span>)
+200:         <span class="ruby-identifier">message</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>[<span class="ruby-identifier">:message</span>]
+201:       <span class="ruby-keyword kw">end</span>
+202:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cannot?</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+203:         <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">unauthorized_message</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+204:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">AccessDenied</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+205:       <span class="ruby-keyword kw">end</span>
+206:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">can</span><span class="method-args">(action = nil, subject = nil, conditions = nil, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Defines which abilities are allowed using two arguments. The first one is
+the action you&#8216;re setting the permission for, the second one is the
+class of object you&#8216;re setting it on.
+</p>
+<pre>
+  can :update, Article
+</pre>
+<p>
+You <a href="Ability.html#M000003">can</a> pass an array for either of
+these parameters to match any one. Here the user has the ability to update
+or destroy both articles and comments.
+</p>
+<pre>
+  can [:update, :destroy], [Article, Comment]
+</pre>
+<p>
+You <a href="Ability.html#M000003">can</a> pass :all to match any object
+and :manage to match any action. Here are some examples.
+</p>
+<pre>
+  can :manage, :all
+  can :update, :all
+  can :manage, Project
+</pre>
+<p>
+You <a href="Ability.html#M000003">can</a> pass a hash of conditions as the
+third argument. Here the user <a href="Ability.html#M000003">can</a> only
+see active projects which he owns.
+</p>
+<pre>
+  can :read, Project, :active =&gt; true, :user_id =&gt; user.id
+</pre>
+<p>
+See ActiveRecordAdditions#accessible_by for how to use this in database
+queries. These conditions are also used for initial attributes when
+building a record in ControllerAdditions#load_resource.
+</p>
+<p>
+If the conditions hash does not give you enough control over defining
+abilities, you <a href="Ability.html#M000003">can</a> use a block along
+with any Ruby code you want.
+</p>
+<pre>
+  can :update, Project do |project|
+    project.groups.include?(user.group)
+  end
+</pre>
+<p>
+If the block returns true then the user has that :update ability for that
+project, otherwise he will be denied access. The downside to using a block
+is that it <a href="Ability.html#M000004">cannot</a> be used to generate
+conditions for database queries.
+</p>
+<p>
+You <a href="Ability.html#M000003">can</a> pass custom objects into this
+&quot;<a href="Ability.html#M000003">can</a>&quot; method, this is usually
+done with a symbol and is useful if a class isn&#8216;t available to define
+permissions on.
+</p>
+<pre>
+  can :read, :stats
+  can? :read, :stats # =&gt; true
+</pre>
+<p>
+IMPORTANT: Neither a hash of conditions or a block will be used when
+checking permission on a class.
+</p>
+<pre>
+  can :update, Project, :priority =&gt; 3
+  can? :update, Project # =&gt; true
+</pre>
+<p>
+If you pass no arguments to <tt><a
+href="Ability.html#M000003">can</a></tt>, the action, class, and object
+will be passed to the block and the block will always be executed. This
+allows you to override the full behavior if the permissions are defined in
+an external source such as the database.
+</p>
+<pre>
+  can do |action, object_class, object|
+    # check the database and return true/false
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 124</span>
+124:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">can</span>(<span class="ruby-identifier">action</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">subject</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">conditions</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+125:       <span class="ruby-identifier">can_definitions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">CanDefinition</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-identifier">conditions</span>, <span class="ruby-identifier">block</span>)
+126:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="#M000001" class="method-signature">
+          <span class="method-name">can?</span><span class="method-args">(action, subject, *extra_args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Check if the user has permission to perform a given action on an object.
+</p>
+<pre>
+  can? :destroy, @project
+</pre>
+<p>
+You <a href="Ability.html#M000003">can</a> also pass the class instead of
+an instance (if you don&#8216;t have one handy).
+</p>
+<pre>
+  can? :create, Project
+</pre>
+<p>
+Nested resources <a href="Ability.html#M000003">can</a> be passed through a
+hash, this way conditions which are dependent upon the association will
+work when using a class.
+</p>
+<pre>
+  can? :create, @category =&gt; Project
+</pre>
+<p>
+Any additional arguments will be passed into the &quot;<a
+href="Ability.html#M000003">can</a>&quot; block definition. This <a
+href="Ability.html#M000003">can</a> be used to pass more information about
+the user&#8216;s request for example.
+</p>
+<pre>
+  can? :create, Project, request.remote_ip
+
+  can :create Project do |project, remote_ip|
+    # ...
+  end
+</pre>
+<p>
+Not only <a href="Ability.html#M000003">can</a> you use the <a
+href="Ability.html#M000001">can?</a> method in the controller and view (see
+<a href="ControllerAdditions.html">ControllerAdditions</a>), but you <a
+href="Ability.html#M000003">can</a> also call it directly on an ability
+instance.
+</p>
+<pre>
+  ability.can? :destroy, @project
+</pre>
+<p>
+This makes testing a user&#8216;s abilities very easy.
+</p>
+<pre>
+  def test &quot;user can only destroy projects which he owns&quot;
+    user = User.new
+    ability = Ability.new(user)
+    assert ability.can?(:destroy, Project.new(:user =&gt; user))
+    assert ability.cannot?(:destroy, Project.new)
+  end
+</pre>
+<p>
+Also see the RSpec Matchers to aid in testing.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000001-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 56</span>
+56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">can?</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">extra_args</span>)
+57:       <span class="ruby-identifier">match</span> = <span class="ruby-identifier">relevant_can_definitions_for_match</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>).<span class="ruby-identifier">detect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">can_definition</span><span class="ruby-operator">|</span>
+58:         <span class="ruby-identifier">can_definition</span>.<span class="ruby-identifier">matches_conditions?</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-identifier">extra_args</span>)
+59:       <span class="ruby-keyword kw">end</span>
+60:       <span class="ruby-identifier">match</span> <span class="ruby-value">? </span><span class="ruby-identifier">match</span>.<span class="ruby-identifier">base_behavior</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>
+61:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">cannot</span><span class="method-args">(action = nil, subject = nil, conditions = nil, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Defines an ability which <a href="Ability.html#M000004">cannot</a> be done.
+Accepts the same arguments as &quot;<a
+href="Ability.html#M000003">can</a>&quot;.
+</p>
+<pre>
+  can :read, :all
+  cannot :read, Comment
+</pre>
+<p>
+A block <a href="Ability.html#M000003">can</a> be passed just like &quot;<a
+href="Ability.html#M000003">can</a>&quot;, however if the logic is complex
+it is recommended to use the &quot;<a
+href="Ability.html#M000003">can</a>&quot; method.
+</p>
+<pre>
+  cannot :read, Product do |product|
+    product.invisible?
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 140</span>
+140:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cannot</span>(<span class="ruby-identifier">action</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">subject</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">conditions</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+141:       <span class="ruby-identifier">can_definitions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">CanDefinition</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-identifier">conditions</span>, <span class="ruby-identifier">block</span>)
+142:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="#M000002" class="method-signature">
+          <span class="method-name">cannot?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Convenience method which works the same as &quot;<a
+href="Ability.html#M000001">can?</a>&quot; but returns the opposite value.
+</p>
+<pre>
+  cannot? :destroy, @project
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 67</span>
+67:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cannot?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+68:       <span class="ruby-operator">!</span><span class="ruby-identifier">can?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+69:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="#M000007" class="method-signature">
+          <span class="method-name">clear_aliased_actions</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes previously aliased actions including the defaults.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 185</span>
+185:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear_aliased_actions</span>
+186:       <span class="ruby-ivar">@aliased_actions</span> = {}
+187:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="#M000012" class="method-signature">
+          <span class="method-name">has_block?</span><span class="method-args">(action, subject)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 224</span>
+224:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_block?</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+225:       <span class="ruby-identifier">relevant_can_definitions</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>).<span class="ruby-identifier">any?</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:only_block?</span>)
+226:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="#M000013" class="method-signature">
+          <span class="method-name">has_raw_sql?</span><span class="method-args">(action, subject)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000013-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 228</span>
+228:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_raw_sql?</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+229:       <span class="ruby-identifier">relevant_can_definitions</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>).<span class="ruby-identifier">any?</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:only_raw_sql?</span>)
+230:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="#M000008" class="method-signature">
+          <span class="method-name">query</span><span class="method-args">(action, subject)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a <a href="Query.html">CanCan::Query</a> instance to help generate
+database queries based on the ability. If any relevant <a
+href="Ability.html#M000003">can</a> definitions use a block then an
+exception will be raised because an SQL <a
+href="Ability.html#M000008">query</a> <a
+href="Ability.html#M000004">cannot</a> be generated from blocks of code.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 192</span>
+192:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">query</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+193:       <span class="ruby-constant">Query</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">subject</span>, <span class="ruby-identifier">relevant_can_definitions_for_query</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>))
+194:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="#M000010" class="method-signature">
+          <span class="method-name">unauthorized_message</span><span class="method-args">(action, subject)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/ability.rb, line 208</span>
+208:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unauthorized_message</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+209:       <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">unauthorized_message_keys</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">subject</span>)
+210:       <span class="ruby-identifier">variables</span> = {<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_s</span>}
+211:       <span class="ruby-identifier">variables</span>[<span class="ruby-identifier">:subject</span>] = (<span class="ruby-identifier">subject</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Class</span> <span class="ruby-value">? </span><span class="ruby-identifier">subject</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">subject</span>.<span class="ruby-identifier">class</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>
+212:       <span class="ruby-identifier">message</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">variables</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unauthorized</span>, <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">keys</span> <span class="ruby-operator">+</span> [<span class="ruby-value str">&quot;&quot;</span>]))
+213:       <span class="ruby-identifier">message</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">message</span>
+214:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

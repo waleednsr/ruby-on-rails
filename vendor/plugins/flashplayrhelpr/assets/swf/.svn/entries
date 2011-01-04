@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2006-12-11T14:04:31.122612Z"
+   url="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr/assets/swf"
+   last-author="faro00oq"
+   kind="dir"
+   repos="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr"
+   revision="3"/>
+<entry
+   committed-rev="10"
+   name="flvplayer.swf"
+   text-time="2006-12-29T12:56:39.250000Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="2ce32673871ddca86c3f4f5e8b9078d3"
+   last-author="faro00oq"
+   kind="file"
+   prop-time="2006-12-11T14:05:44.281250Z"
+   revision="10"/>
+<entry
+   committed-rev="10"
+   name="flvplayer_README.html"
+   text-time="2006-12-29T12:56:29.406250Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="3dffe92ab12ed5d7b3af28ab7cfefbb3"
+   last-author="faro00oq"
+   kind="file"
+   revision="10"/>
+<entry
+   committed-rev="10"
+   name="mp3player.swf"
+   text-time="2006-12-29T12:51:02.531250Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="a2d519d6e664f2c0cb7813c1190354c9"
+   last-author="faro00oq"
+   kind="file"
+   prop-time="2006-12-11T14:05:44.406250Z"
+   revision="10"/>
+<entry
+   committed-rev="10"
+   name="mediaplayer.swf"
+   text-time="2006-12-29T12:57:49.625000Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="06e7d87e08264cc938ee774ea6c6b7ea"
+   last-author="faro00oq"
+   kind="file"
+   prop-time="2006-12-11T14:05:44.421875Z"
+   revision="10"/>
+<entry
+   committed-rev="10"
+   name="imagerotator.swf"
+   text-time="2006-12-29T12:54:20.703125Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="215a7513615bcb0afc50245c20ace927"
+   last-author="faro00oq"
+   kind="file"
+   prop-time="2006-12-11T14:05:44.453125Z"
+   revision="10"/>
+<entry
+   committed-rev="10"
+   name="mediaplayer_README.html"
+   text-time="2006-12-29T12:58:02.234375Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="a0641ac0d1b9053efcfa5e91ba33fa3e"
+   last-author="faro00oq"
+   kind="file"
+   revision="10"/>
+<entry
+   committed-rev="10"
+   name="mp3player_README.html"
+   text-time="2006-12-29T12:56:12.687500Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="c9d2a9ed9e9a11c5aef7964fa7660d43"
+   last-author="faro00oq"
+   kind="file"
+   revision="10"/>
+<entry
+   committed-rev="10"
+   name="imagerotator_README.html"
+   text-time="2006-12-29T12:54:50.125000Z"
+   committed-date="2006-12-29T12:57:28.478618Z"
+   checksum="8c3a9ce4fa3cff70f842f5bedaae95a2"
+   last-author="faro00oq"
+   kind="file"
+   revision="10"/>
+</wc-entries>

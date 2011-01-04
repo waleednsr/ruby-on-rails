@@ -1,0 +1,15 @@
+<% div_for comment do%>
+<div id="comments">
+<h2>New Comment </h2>
+<p>
+<%=h comment.name %><br />
+<%=h comment.content%><br />
+ </p>
+ <h3><em><%= image_tag '/images/twitter-trans.png'%><br/ >
+Posted By :<%=h comment.email %><br />
+</em></h3>
+<%=h comment.author%>
+<h3>about :<%=h time_ago_in_words comment.created_at%></h3>
+</div>
+
+<% end %>

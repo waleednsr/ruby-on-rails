@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2006-12-11T14:04:31.122612Z"
+   url="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr/lib"
+   last-author="faro00oq"
+   kind="dir"
+   repos="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr"
+   revision="3"/>
+<entry
+   committed-rev="11"
+   name="flash_player_helper.rb"
+   text-time="2007-01-02T14:39:49.093750Z"
+   committed-date="2007-01-04T12:14:01.972617Z"
+   checksum="bfac8c217dd50b83bdfed0c74b9887fc"
+   last-author="faro00oq"
+   kind="file"
+   revision="11"/>
+</wc-entries>

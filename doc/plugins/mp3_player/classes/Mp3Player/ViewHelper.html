@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Mp3Player::ViewHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Mp3Player::ViewHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/mp3_player/lib/mp3_player/view_helper_rb.html">
+                vendor/plugins/mp3_player/lib/mp3_player/view_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This module contains the view helper <tt><a
+href="ViewHelper.html#M000001">mp3_player</a></tt>
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000002">increment_player_count</a>&nbsp;&nbsp;
+      <a href="#M000001">mp3_player</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">COLOR_OPTIONS</td>
+          <td>=</td>
+          <td class="context-item-value">{       :bg               =&gt; &quot;BBBBBB&quot;,        :left_bg          =&gt; &quot;AAAAAA&quot;,        :right_bg         =&gt; &quot;AAAAAA&quot;,        :right_bg_hover   =&gt; &quot;EEEEEE&quot;,        :left_icon        =&gt; &quot;222222&quot;,        :right_icon       =&gt; &quot;222222&quot;,        :right_icon_hover =&gt; &quot;222222&quot;,        :text             =&gt; &quot;222222&quot;,        :slider           =&gt; &quot;333333&quot;,        :loader           =&gt; &quot;DDDFFF&quot;,        :track            =&gt; &quot;888888&quot;,        :border           =&gt; &quot;333333&quot;,     }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+These are the names of the colour params you can set to style the <a
+href="ViewHelper.html#M000001">mp3_player</a> (all colours should be
+expressed as 6 figure hex values minus the &#8217;#&#8217;)
+
+<ul>
+<li>:bg =&gt; background colour
+
+</li>
+<li>:left_bg =&gt; background color of the left tab
+
+</li>
+<li>:right_bg =&gt; background colour of the right tab
+
+</li>
+<li>:right_bg_hover =&gt; colour of the right background as the cursor hovers
+over
+
+</li>
+<li>:left_icon =&gt; the color of the speaker icon on the left
+
+</li>
+<li>:right_icon =&gt; colour of the play/pause icon on the right
+
+</li>
+<li>:right_icon_hover =&gt; colour of the play/pause icon as the cursor hovers
+over
+
+</li>
+<li>:text =&gt; colour of the text
+
+</li>
+<li>:slider =&gt; colour of the slider bar
+
+</li>
+<li>:loader =&gt; colour of the loaded data so far
+
+</li>
+<li>:track =&gt; colour of the track on the slider
+
+</li>
+<li>:border =&gt; colour of the buffer border
+
+</li>
+</ul>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">BOOLEAN_OPTIONS</td>
+          <td>=</td>
+          <td class="context-item-value">{       :autostart =&gt; false,        :loop      =&gt; false,       :animation =&gt; true,     }</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+These options are boolean values that should be converted to
+&quot;yes&quot; or &quot;no&quot; for the flash object
+
+<ul>
+<li>:autostart =&gt; should the track start playing on page load?
+
+</li>
+<li>:loop =&gt; should the track loop continuously?
+
+</li>
+<li>:animation =&gt; should the mp3 player open when clicked?
+
+</li>
+</ul>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">OTHER_OPTIONS</td>
+          <td>=</td>
+          <td class="context-item-value">{       :width =&gt; 290,        :class =&gt; &quot;mp3_player&quot;</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc"><ul>
+<li>:width =&gt; width of the player when open in pixels
+
+</li>
+<li>:class =&gt; class of the div wrapping the player
+
+</li>
+</ul>
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">player_count</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="#M000002" class="method-signature">
+          <span class="method-name">increment_player_count</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/mp3_player/lib/mp3_player/view_helper.rb, line 103</span>
+103:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment_player_count</span>
+104:       <span class="ruby-ivar">@player_count</span> <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+105:       <span class="ruby-ivar">@player_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+106:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="#M000001" class="method-signature">
+          <span class="method-name">mp3_player</span><span class="method-args">(path_to_file, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This is the helper method you&#8216;ll call in the view. <tt>&lt;%= <a
+href="ViewHelper.html#M000001">mp3_player</a> @song.mp3.url %&gt;</tt> See
+the options above for more info on customising the player to match your
+site
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000001-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/mp3_player/lib/mp3_player/view_helper.rb, line 55</span>
+55:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mp3_player</span>(<span class="ruby-identifier">path_to_file</span>, <span class="ruby-identifier">options</span> = {})      
+56:       <span class="ruby-comment cmt"># convert booleans to 'yes'/'no'</span>
+57:       <span class="ruby-constant">BOOLEAN_OPTIONS</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-value str">&quot;yes&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-value str">&quot;no&quot;</span>}
+58: 
+59:       <span class="ruby-comment cmt"># set defaults</span>
+60:       <span class="ruby-identifier">default_options</span> = <span class="ruby-constant">COLOR_OPTIONS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">BOOLEAN_OPTIONS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">OTHER_OPTIONS</span>))
+61:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge!</span> <span class="ruby-identifier">default_options</span>
+62: 
+63:       <span class="ruby-comment cmt"># ensure options are valid</span>
+64:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-identifier">default_options</span>.<span class="ruby-identifier">keys</span>)
+65: 
+66:       <span class="ruby-comment cmt"># extract color options</span>
+67:       <span class="ruby-identifier">color_options</span>   = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-constant">COLOR_OPTIONS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>) }
+68: 
+69:       <span class="ruby-comment cmt"># extract boolean options</span>
+70:       <span class="ruby-identifier">boolean_options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-constant">BOOLEAN_OPTIONS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>) }
+71: 
+72:       <span class="ruby-comment cmt"># add '0x' to colors and add color params</span>
+73:       <span class="ruby-identifier">flash_vars</span> = <span class="ruby-identifier">color_options</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{key.to_s.gsub(&quot;_&quot;, &quot;&quot;)}=0x#{value}&quot;</span> }
+74: 
+75:       <span class="ruby-comment cmt"># add boolean params</span>
+76:       <span class="ruby-identifier">flash_vars</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">boolean_options</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{key}=#{value}&quot;</span> }
+77: 
+78:       <span class="ruby-comment cmt"># add the soundFile param</span>
+79:       <span class="ruby-identifier">flash_vars</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;soundFile=#{path_to_file}&quot;</span>
+80: 
+81:       <span class="ruby-comment cmt"># join params with an ampersand</span>
+82:       <span class="ruby-identifier">flash_vars</span> = <span class="ruby-identifier">flash_vars</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;&amp;&quot;</span>).<span class="ruby-identifier">to_s</span>
+83: 
+84:       <span class="ruby-comment cmt"># turn the whole thing into a meaty string</span>
+85:       <span class="ruby-identifier">output</span> = <span class="ruby-value str">&quot;&lt;div class=\\\&quot;\#{options[:class]}\\\&quot; id=\\\&quot;mp3_player_\#{player_count}\\\&quot;&gt;\n&lt;object type=\&quot;application/x-shockwave-flash\&quot; data=\&quot;/player.swf\&quot; height=\&quot;24\&quot; width=\\\&quot;\#{options[:width]}\\\&quot;&gt;\n&lt;param name=\&quot;movie\&quot; value=\&quot;/player.swf\&quot; /&gt;\n&lt;param name=\&quot;FlashVars\&quot; value=\&quot;\#{URI.escape flash_vars}\&quot; /&gt;\n&lt;param name=\&quot;quality\&quot; value=\&quot;high\&quot; /&gt;\n&lt;param name=\&quot;menu\&quot; value=\&quot;true\&quot; /&gt;\n&lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot; /&gt;\n&lt;/object&gt;\n&lt;/div&gt;\n&quot;</span>
+86:       <span class="ruby-identifier">output</span> <span class="ruby-comment cmt"># =&gt; your awesome mp3_player</span>
+87:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

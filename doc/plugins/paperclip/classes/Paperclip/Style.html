@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Paperclip::Style</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Paperclip::Style</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/paperclip/lib/paperclip/style_rb.html">
+                vendor/plugins/paperclip/lib/paperclip/style.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="Style.html">Style</a> class holds the definition of a
+thumbnail style, applying whatever processing is required to normalize the
+definition and delaying the evaluation of block parameters until useful
+context is available.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000158">[]</a>&nbsp;&nbsp;
+      <a href="#M000159">[]=</a>&nbsp;&nbsp;
+      <a href="#M000155">convert_options</a>&nbsp;&nbsp;
+      <a href="#M000156">geometry</a>&nbsp;&nbsp;
+      <a href="#M000151">new</a>&nbsp;&nbsp;
+      <a href="#M000157">processor_options</a>&nbsp;&nbsp;
+      <a href="#M000152">processors</a>&nbsp;&nbsp;
+      <a href="#M000153">whiny</a>&nbsp;&nbsp;
+      <a href="#M000154">whiny?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">attachment</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">format</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">name</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000151" class="method-detail">
+        <a name="M000151"></a>
+
+        <div class="method-heading">
+          <a href="#M000151" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(name, definition, attachment)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a <a href="Style.html">Style</a> object. <tt>name</tt> is the name
+of the attachment, <tt>definition</tt> is the style definition from
+has_attached_file, which can be string, array or hash
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000151-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000151-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 14</span>
+14:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span>, <span class="ruby-identifier">attachment</span>
+15:       <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
+16:       <span class="ruby-ivar">@attachment</span> = <span class="ruby-identifier">attachment</span>
+17:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+18:         <span class="ruby-ivar">@geometry</span> = <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:geometry</span>)
+19:         <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:format</span>)
+20:         <span class="ruby-ivar">@processors</span> = <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:processors</span>)
+21:         <span class="ruby-ivar">@other_args</span> = <span class="ruby-identifier">definition</span>
+22:       <span class="ruby-keyword kw">else</span>
+23:         <span class="ruby-ivar">@geometry</span>, <span class="ruby-ivar">@format</span> = [<span class="ruby-identifier">definition</span>, <span class="ruby-keyword kw">nil</span>].<span class="ruby-identifier">flatten</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>]
+24:         <span class="ruby-ivar">@other_args</span> = {}
+25:       <span class="ruby-keyword kw">end</span>
+26:       <span class="ruby-ivar">@format</span>  = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">blank?</span>
+27:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000158" class="method-detail">
+        <a name="M000158"></a>
+
+        <div class="method-heading">
+          <a href="#M000158" class="method-signature">
+          <span class="method-name">[]</span><span class="method-args">(key)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Supports getting and setting style properties with hash notation to ensure
+backwards-compatibility eg. @attachment.styles[:large][:<a
+href="Style.html#M000156">geometry</a>]@ will still work
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000158-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000158-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 73</span>
+73:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
+74:       <span class="ruby-keyword kw">if</span> [<span class="ruby-identifier">:name</span>, <span class="ruby-identifier">:convert_options</span>, <span class="ruby-identifier">:whiny</span>, <span class="ruby-identifier">:processors</span>, <span class="ruby-identifier">:geometry</span>, <span class="ruby-identifier">:format</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+75:         <span class="ruby-identifier">send</span>(<span class="ruby-identifier">key</span>)
+76:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-ivar">@other_args</span>[<span class="ruby-identifier">key</span>]
+77:         <span class="ruby-ivar">@other_args</span>[<span class="ruby-identifier">key</span>]
+78:       <span class="ruby-keyword kw">end</span>
+79:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000159" class="method-detail">
+        <a name="M000159"></a>
+
+        <div class="method-heading">
+          <a href="#M000159" class="method-signature">
+          <span class="method-name">[]=</span><span class="method-args">(key, value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000159-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000159-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 81</span>
+81:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+82:       <span class="ruby-keyword kw">if</span> [<span class="ruby-identifier">:name</span>, <span class="ruby-identifier">:convert_options</span>, <span class="ruby-identifier">:whiny</span>, <span class="ruby-identifier">:processors</span>, <span class="ruby-identifier">:geometry</span>, <span class="ruby-identifier">:format</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+83:         <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{key}=&quot;</span>.<span class="ruby-identifier">intern</span>, <span class="ruby-identifier">value</span>)
+84:       <span class="ruby-keyword kw">else</span>
+85:         <span class="ruby-ivar">@other_args</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>
+86:       <span class="ruby-keyword kw">end</span>
+87:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000155" class="method-detail">
+        <a name="M000155"></a>
+
+        <div class="method-heading">
+          <a href="#M000155" class="method-signature">
+          <span class="method-name">convert_options</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000155-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000155-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 47</span>
+47:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">convert_options</span>
+48:       <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:extra_options_for</span>, <span class="ruby-identifier">name</span>)
+49:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000156" class="method-detail">
+        <a name="M000156"></a>
+
+        <div class="method-heading">
+          <a href="#M000156" class="method-signature">
+          <span class="method-name">geometry</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns the <a href="Style.html#M000156">geometry</a> string for this style
+if a proc has been supplied, we call it here
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000156-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000156-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 53</span>
+53:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">geometry</span>
+54:       <span class="ruby-ivar">@geometry</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@geometry</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">instance</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@geometry</span>
+55:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000157" class="method-detail">
+        <a name="M000157"></a>
+
+        <div class="method-heading">
+          <a href="#M000157" class="method-signature">
+          <span class="method-name">processor_options</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Supplies the hash of options that <a
+href="Style.html#M000152">processors</a> expect to receive as their second
+argument Arguments other than the standard <a
+href="Style.html#M000156">geometry</a>, format etc are just passed through
+from initialization and any procs are called here, just before
+post-processing.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000157-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000157-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 60</span>
+60:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">processor_options</span>
+61:       <span class="ruby-identifier">args</span> = {}
+62:       <span class="ruby-ivar">@other_args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+63:         <span class="ruby-identifier">args</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">attachment</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">v</span>
+64:       <span class="ruby-keyword kw">end</span>
+65:       [<span class="ruby-identifier">:processors</span>, <span class="ruby-identifier">:geometry</span>, <span class="ruby-identifier">:format</span>, <span class="ruby-identifier">:whiny</span>, <span class="ruby-identifier">:convert_options</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+66:         (<span class="ruby-identifier">arg</span> = <span class="ruby-identifier">send</span>(<span class="ruby-identifier">k</span>)) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">arg</span>
+67:       <span class="ruby-keyword kw">end</span>
+68:       <span class="ruby-identifier">args</span>
+69:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000152" class="method-detail">
+        <a name="M000152"></a>
+
+        <div class="method-heading">
+          <a href="#M000152" class="method-signature">
+          <span class="method-name">processors</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+retrieves from the attachment the <a
+href="Style.html#M000152">processors</a> defined in the has_attached_file
+call (which method (in the attachment) will call any supplied procs) There
+is an important change of interface here: a style rule can set its own <a
+href="Style.html#M000152">processors</a> by default we behave as before,
+though.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000152-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000152-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 33</span>
+33:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">processors</span>
+34:       <span class="ruby-ivar">@processors</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">processors</span>
+35:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000153" class="method-detail">
+        <a name="M000153"></a>
+
+        <div class="method-heading">
+          <a href="#M000153" class="method-signature">
+          <span class="method-name">whiny</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+retrieves from the attachment the <a href="Style.html#M000153">whiny</a>
+setting
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000153-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000153-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 38</span>
+38:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">whiny</span>
+39:       <span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">whiny</span>
+40:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000154" class="method-detail">
+        <a name="M000154"></a>
+
+        <div class="method-heading">
+          <a href="#M000154" class="method-signature">
+          <span class="method-name">whiny?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns true if we&#8216;re inclined to grumble
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000154-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000154-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/paperclip/lib/paperclip/style.rb, line 43</span>
+43:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">whiny?</span>
+44:       <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">whiny</span>
+45:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

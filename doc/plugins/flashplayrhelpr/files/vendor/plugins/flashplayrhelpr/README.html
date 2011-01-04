@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>vendor/plugins/flashplayrhelpr/README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Fri Dec 15 11:38:08 +0200 2006</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>flash_player_helper plugin</h1>
+<p>
+Creates Flash MP3, Image Slideshow, Media, and FLV players for your views
+using Jeroen Wijering&#8216;s Flash Players. Mixes itself into the
+ActionView::Base module, so no extra include is required. Adds the flash
+movies and javascript files to your Rails app so no downloading/setup is
+required See
+</p>
+<pre>
+        - http://jroller.com/page/abstractScope for tutorials
+        - each flash player's (in assets/swf folder) accompanying README.html for its details.
+</pre>
+<h2>License</h2>
+<p>
+Flash SWF Files: The Flash files in the assets/swf folder are released
+under the terms of the Creative Commons License by Jeroen Wijering. If you
+plan on using the Flash files for commercial purposes, you MUST purchase
+them first from <a
+href="http://www.jeroenwijering.com/?order=form">www.jeroenwijering.com/?order=form</a>
+See each SWF files&#8217; accompanying README.html for license information.
+</p>
+<p>
+Flash Player Rails Helper: See flash_player_helper.rb or MIT-LICENSE.
+</p>
+<p>
+Unobtrusive Flash Objects: See ufo.js for license.
+</p>
+<h2>RubyForge</h2>
+<ul>
+<li><a
+href="http://rubyforge.org/projects/flashplayrhelpr">rubyforge.org/projects/flashplayrhelpr</a>/
+
+</li>
+</ul>
+<h2>Resources</h2>
+<p>
+Subversion
+</p>
+<ul>
+<li>svn://rubyforge.org/var/svn/flashplayrhelpr (also serves as plugin
+resource)
+
+</li>
+<li><a
+href="http://rubyforge.org/viewvc/?root=flashplayrhelpr">rubyforge.org/viewvc/?root=flashplayrhelpr</a>
+
+</li>
+</ul>
+<p>
+Blog
+</p>
+<ul>
+<li><a
+href="http://www.jroller.com/page/abstractScope">www.jroller.com/page/abstractScope</a>
+
+</li>
+</ul>
+<p>
+Author
+</p>
+<ul>
+<li>Farooq Ali farooq [at] thoughtworks [dot] com
+
+</li>
+</ul>
+<p>
+Jeroen Wijering&#8216;s Flash Players
+</p>
+<ul>
+<li><a href="http://www.jeroenwijering.com">www.jeroenwijering.com</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

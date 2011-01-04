@@ -1,0 +1,68 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "articles")}", articles_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "Submit New Article")}", new_article_path %></li>
+      <li ><%= link_to "#{t("web-app-theme.show", :default => "Details")}", article_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <h2><%= link_to @article.name, @article  %></h2>
+          
+        </p>
+        <div id="description">
+        <p>
+          <b><%= t("activerecord.attributes.article.description", :default => t("activerecord.labels.description", :default => "Description")) %>:</b>
+          <%=h  @article.description %>
+        </p>
+		</div>
+
+        <p>
+            <b>Posted by:</b>
+          <%= @article.author %>
+        </p>
+
+        <p>
+          <em><%= t("activerecord.attributes.article.published_at", :default => t("activerecord.labels.published_at", :default => "Published at")) %>:</em>
+          <%=  @article.published_at %>
+        </p>
+
+   
+  
+  <p>
+    
+    <img src="<%= @article.photo.url%>" width="250px" height="250px" >
+  </p>
+   <p>
+   <%= ratings_for @article, current_user, :show_user_rating=>true %>
+   </p>
+    <p>
+ <%= render :partial=>@article.comments%>
+
+      </p>
+
+
+<p>
+<% form_for [@article, Comment.new] do |f|%>
+<h2><%= f.label "Post new Comment"%><br/> </h2>
+Name:<br /> <%= f.text_field :name%><br />
+Email:<br /> <%= f.text_field :email%><br /> 
+<%= f.text_area :content, :rows=>10, :cols=>61 %><br />
+ 
+<%= f.submit "add Comment"%>
+<% end %>
+</p>	  
+      <div class="wat-cf">
+	  <% if can? :update, @article %>
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_article_path(@article), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", article_path(@article), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      <% end %>
+	  </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

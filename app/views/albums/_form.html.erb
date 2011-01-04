@@ -1,0 +1,14 @@
+
+  <div class="group">
+    <%= f.label :image, t("activerecord.attributes.album.image", :default => "Image"), :class => :label %>
+    <%= f.file_field :image, :class => 'file_field' %><br />
+    <span class="description">Ex: image upload jpg ,jpeg, gif</span>
+  </div>
+
+        
+<div class="group navform wat-cf">
+  <button class="button" type="submit">
+    <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+  </button>  
+  <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", albums_path, :class => "button" %> 
+</div>

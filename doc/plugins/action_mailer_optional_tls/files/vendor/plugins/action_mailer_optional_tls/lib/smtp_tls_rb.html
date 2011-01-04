@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: smtp_tls.rb</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>smtp_tls.rb</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Dec 16 00:43:44 +0200 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+    <div id="requires-list">
+      <h3 class="section-bar">Required files</h3>
+
+      <div class="name-list">
+      openssl&nbsp;&nbsp;
+      net/smtp&nbsp;&nbsp;
+      </div>
+    </div>
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000006">do_helo</a>&nbsp;&nbsp;
+      <a href="#M000005">do_ssl_start</a>&nbsp;&nbsp;
+      <a href="#M000004">do_tls_start</a>&nbsp;&nbsp;
+      <a href="#M000008">quit</a>&nbsp;&nbsp;
+      <a href="#M000003">start</a>&nbsp;&nbsp;
+      <a href="#M000002">start</a>&nbsp;&nbsp;
+      <a href="#M000007">starttls</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="#M000002" class="method-signature">
+          <span class="method-name">start</span><span class="method-args">( address, port = nil, helo = 'localhost.localdomain', user = nil, secret = nil, authtype = nil, use_tls = false, use_ssl = false) {|smtp| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb, line 6</span>
+ 6:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span>( <span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span> = <span class="ruby-keyword kw">nil</span>,
+ 7:                   <span class="ruby-identifier">helo</span> = <span class="ruby-value str">'localhost.localdomain'</span>,
+ 8:                   <span class="ruby-identifier">user</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">secret</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">authtype</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">use_tls</span> = <span class="ruby-keyword kw">false</span>,
+ 9:                   <span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword kw">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment cmt"># :yield: smtp</span>
+10:     <span class="ruby-identifier">new</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span>).<span class="ruby-identifier">start</span>(<span class="ruby-identifier">helo</span>, <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span>, <span class="ruby-identifier">use_tls</span>, <span class="ruby-identifier">use_ssl</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+11:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="#M000006" class="method-signature">
+          <span class="method-name">do_helo</span><span class="method-args">(helodomain)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb, line 96</span>
+ 96:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_helo</span>(<span class="ruby-identifier">helodomain</span>)
+ 97:      <span class="ruby-keyword kw">begin</span>
+ 98:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@esmtp</span>
+ 99:         <span class="ruby-identifier">ehlo</span> <span class="ruby-identifier">helodomain</span>
+100:       <span class="ruby-keyword kw">else</span>
+101:         <span class="ruby-identifier">helo</span> <span class="ruby-identifier">helodomain</span>
+102:       <span class="ruby-keyword kw">end</span>
+103:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">ProtocolError</span>
+104:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@esmtp</span>
+105:         <span class="ruby-ivar">@esmtp</span> = <span class="ruby-keyword kw">false</span>
+106:         <span class="ruby-ivar">@error_occured</span> = <span class="ruby-keyword kw">false</span>
+107:         <span class="ruby-keyword kw">retry</span>
+108:       <span class="ruby-keyword kw">end</span>
+109:       <span class="ruby-identifier">raise</span>
+110:     <span class="ruby-keyword kw">end</span>
+111:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="#M000005" class="method-signature">
+          <span class="method-name">do_ssl_start</span><span class="method-args">(helodomain, user, secret, authtype)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb, line 68</span>
+68:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_ssl_start</span>(<span class="ruby-identifier">helodomain</span>, <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span>)
+69:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">IOError</span>, <span class="ruby-value str">'SMTP session already started'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@started</span>
+70:     <span class="ruby-identifier">check_auth_args</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">user</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">secret</span>
+71: 
+72:     <span class="ruby-identifier">sock</span> = <span class="ruby-identifier">timeout</span>(<span class="ruby-ivar">@open_timeout</span>) { <span class="ruby-constant">TCPSocket</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@address</span>, <span class="ruby-ivar">@port</span>) }
+73:     <span class="ruby-identifier">raise</span> <span class="ruby-value str">'openssl library not installed'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">OpenSSL</span>)
+74:     <span class="ruby-identifier">ssl</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSLSocket</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sock</span>)
+75:     <span class="ruby-identifier">ssl</span>.<span class="ruby-identifier">sync_close</span> = <span class="ruby-keyword kw">true</span>
+76:     <span class="ruby-identifier">ssl</span>.<span class="ruby-identifier">connect</span>
+77:     <span class="ruby-ivar">@socket</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">InternetMessageIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ssl</span>)
+78:     <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">read_timeout</span> = <span class="ruby-value">60</span> <span class="ruby-comment cmt">#@read_timeout</span>
+79:     <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">debug_output</span> = <span class="ruby-constant">STDERR</span> <span class="ruby-comment cmt">#@debug_output</span>
+80: 
+81:     <span class="ruby-identifier">check_response</span>(<span class="ruby-identifier">critical</span> { <span class="ruby-identifier">recv_response</span>() })
+82:     <span class="ruby-identifier">do_helo</span>(<span class="ruby-identifier">helodomain</span>)
+83: 
+84:     <span class="ruby-identifier">do_helo</span>(<span class="ruby-identifier">helodomain</span>)
+85: 
+86:     <span class="ruby-identifier">authenticate</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">user</span>
+87:     <span class="ruby-ivar">@started</span> = <span class="ruby-keyword kw">true</span>
+88:   <span class="ruby-keyword kw">ensure</span>
+89:     <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@started</span>
+90:       <span class="ruby-comment cmt"># authentication failed, cancel connection.</span>
+91:         <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@started</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@socket</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">closed?</span>
+92:       <span class="ruby-ivar">@socket</span> = <span class="ruby-keyword kw">nil</span>
+93:     <span class="ruby-keyword kw">end</span>
+94:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">do_tls_start</span><span class="method-args">(helodomain, user, secret, authtype)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_tls_start</span>(<span class="ruby-identifier">helodomain</span>, <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span>)
+32:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">IOError</span>, <span class="ruby-value str">'SMTP session already started'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@started</span>
+33:     
+34:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">VERSION</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'1.8.6'</span>
+35:       <span class="ruby-identifier">check_auth_args</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">user</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">secret</span>
+36:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">VERSION</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'1.8.7'</span>
+37:       <span class="ruby-identifier">check_auth_args</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>
+38:     <span class="ruby-keyword kw">end</span>
+39: 
+40:     <span class="ruby-identifier">sock</span> = <span class="ruby-identifier">timeout</span>(<span class="ruby-ivar">@open_timeout</span>) { <span class="ruby-constant">TCPSocket</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@address</span>, <span class="ruby-ivar">@port</span>) }
+41:     <span class="ruby-ivar">@socket</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">InternetMessageIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sock</span>)
+42:     <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">read_timeout</span> = <span class="ruby-value">60</span> <span class="ruby-comment cmt">#@read_timeout</span>
+43:     <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">debug_output</span> = <span class="ruby-constant">STDERR</span> <span class="ruby-comment cmt">#@debug_output</span>
+44: 
+45:     <span class="ruby-identifier">check_response</span>(<span class="ruby-identifier">critical</span> { <span class="ruby-identifier">recv_response</span>() })
+46:     <span class="ruby-identifier">do_helo</span>(<span class="ruby-identifier">helodomain</span>)
+47: 
+48:     <span class="ruby-identifier">raise</span> <span class="ruby-value str">'openssl library not installed'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">OpenSSL</span>)
+49:     <span class="ruby-identifier">starttls</span>
+50:     <span class="ruby-identifier">ssl</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSLSocket</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sock</span>)
+51:     <span class="ruby-identifier">ssl</span>.<span class="ruby-identifier">sync_close</span> = <span class="ruby-keyword kw">true</span>
+52:     <span class="ruby-identifier">ssl</span>.<span class="ruby-identifier">connect</span>
+53:     <span class="ruby-ivar">@socket</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">InternetMessageIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ssl</span>)
+54:     <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">read_timeout</span> = <span class="ruby-value">60</span> <span class="ruby-comment cmt">#@read_timeout</span>
+55:     <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">debug_output</span> = <span class="ruby-constant">STDERR</span> <span class="ruby-comment cmt">#@debug_output</span>
+56:     <span class="ruby-identifier">do_helo</span>(<span class="ruby-identifier">helodomain</span>)
+57: 
+58:     <span class="ruby-identifier">authenticate</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">user</span>
+59:     <span class="ruby-ivar">@started</span> = <span class="ruby-keyword kw">true</span>
+60:   <span class="ruby-keyword kw">ensure</span>
+61:     <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@started</span>
+62:       <span class="ruby-comment cmt"># authentication failed, cancel connection.</span>
+63:         <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@started</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@socket</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">closed?</span>
+64:       <span class="ruby-ivar">@socket</span> = <span class="ruby-keyword kw">nil</span>
+65:     <span class="ruby-keyword kw">end</span>
+66:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="#M000008" class="method-signature">
+          <span class="method-name">quit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb, line 117</span>
+117:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quit</span>
+118:     <span class="ruby-keyword kw">begin</span>
+119:       <span class="ruby-identifier">getok</span>(<span class="ruby-value str">'QUIT'</span>)
+120:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">EOFError</span>, <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSLError</span>
+121:     <span class="ruby-keyword kw">end</span>
+122:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">start</span><span class="method-args">( helo = 'localhost.localdomain', user = nil, secret = nil, authtype = nil, use_tls = false, use_ssl = false ) {|smtp| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>( <span class="ruby-identifier">helo</span> = <span class="ruby-value str">'localhost.localdomain'</span>,
+14:              <span class="ruby-identifier">user</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">secret</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">authtype</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">use_tls</span> = <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword kw">false</span> ) <span class="ruby-comment cmt"># :yield: smtp</span>
+15:     <span class="ruby-identifier">start_method</span> = <span class="ruby-identifier">use_tls</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-identifier">do_tls_start</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">use_ssl</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-identifier">do_ssl_start</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:do_start</span>
+16:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+17:       <span class="ruby-keyword kw">begin</span>
+18:         <span class="ruby-identifier">send</span> <span class="ruby-identifier">start_method</span>, <span class="ruby-identifier">helo</span>, <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span>
+19:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-keyword kw">self</span>)
+20:       <span class="ruby-keyword kw">ensure</span>
+21:         <span class="ruby-identifier">do_finish</span>
+22:       <span class="ruby-keyword kw">end</span>
+23:     <span class="ruby-keyword kw">else</span>
+24:       <span class="ruby-identifier">send</span> <span class="ruby-identifier">start_method</span>, <span class="ruby-identifier">helo</span>, <span class="ruby-identifier">user</span>, <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">authtype</span>
+25:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>
+26:     <span class="ruby-keyword kw">end</span>
+27:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="#M000007" class="method-signature">
+          <span class="method-name">starttls</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/action_mailer_optional_tls/lib/smtp_tls.rb, line 113</span>
+113:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">starttls</span>
+114:     <span class="ruby-identifier">getok</span>(<span class="ruby-value str">'STARTTLS'</span>)
+115:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

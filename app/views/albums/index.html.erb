@@ -1,0 +1,47 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf"> 
+ <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "albums")}",albums_path  %></li>
+<li class="first"><%= link_to "#{t("web-app-theme.list", :default => "Songs")}", mp3s_path  %></li>
+	<li class="first"><%= link_to "#{t("web-app-theme.list", :default => "articles")}", articles_path  %></li>
+     
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Albums</h2>
+    <div class="inner">
+      <table class="table">
+     
+        <% @albums.in_groups_of(3, false).each do |album| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= album.id %>
+          </td>
+                    <td>
+            <img src="<%= album.image.url%>" width="200" height="200" />
+          </td> 
+           <td></td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => " Details")}", album_path(album) %> 
+            <% if can? :update, album %>
+			|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_album_path(album) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", album_path(album), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          <% end %>
+		  </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @albums  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<% if can? :update, @album %>
+ <h2><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_album_path %></h2>
+<% end %>
+ <% content_for :sidebar, render(:partial => 'sidebar') -%>

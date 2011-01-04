@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2006-12-11T14:04:31.122612Z"
+   url="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr/assets"
+   last-author="faro00oq"
+   kind="dir"
+   repos="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr"
+   revision="3"/>
+<entry
+   name="swf"
+   kind="dir"/>
+<entry
+   name="javascripts"
+   kind="dir"/>
+</wc-entries>

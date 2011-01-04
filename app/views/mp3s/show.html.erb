@@ -1,0 +1,44 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "Songs")}", mp3s_path  %></li>
+	  <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "articles")}", articles_path  %></li>
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "albums")}",albums_path  %></li>
+	  <li><%= link_to "#{t("web-app-theme.new", :default => "Submit New Song")}", new_mp3_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Details")}", mp3_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.mp3.name", :default => t("activerecord.labels.name", :default => "Name")) %>:</b>
+          <%= @mp3.name %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.mp3.singer", :default => t("activerecord.labels.singer", :default => "Singer")) %>:</b>
+          <%= @mp3.singer %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.mp3.length", :default => t("activerecord.labels.length", :default => "Length")) %>:</b>
+          <%= @mp3.length %>
+        </p>
+ 
+        <p>
+             <%= mp3_player @mp3.photo.url, :text=>"333333" %>
+        </p>
+		<p>
+	     <%= image_tag @mp3.image.url %></p>
+      <div class="wat-cf">
+	  <% if can? :update,@mp3 %>
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_mp3_path(@mp3), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", mp3_path(@mp3), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+     <% end %>
+	 </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

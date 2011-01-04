@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="2"
+   name=""
+   committed-date="2006-12-11T14:00:32.470952Z"
+   url="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr"
+   last-author="faro00oq"
+   kind="dir"
+   uuid="026f95d7-0720-441b-b0cb-f13bf317986a"
+   repos="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr"
+   revision="2"/>
+<entry
+   name="test"
+   kind="dir"/>
+<entry
+   name="assets"
+   kind="dir"/>
+<entry
+   committed-rev="5"
+   name="Rakefile"
+   text-time="2006-12-11T14:41:52.203125Z"
+   committed-date="2006-12-11T14:52:34.352662Z"
+   checksum="7bb7eb2e2cf12731ba245ee2326c14b5"
+   last-author="faro00oq"
+   kind="file"
+   revision="5"/>
+<entry
+   committed-rev="5"
+   name=".project"
+   text-time="2006-12-11T14:04:35.828125Z"
+   committed-date="2006-12-11T14:52:34.352662Z"
+   checksum="c85a4a9c0a8f7cf5491d4cbcc99cff4b"
+   last-author="faro00oq"
+   kind="file"
+   revision="5"/>
+<entry
+   committed-rev="8"
+   name="init.rb"
+   text-time="2006-12-11T15:59:13.640625Z"
+   committed-date="2006-12-11T19:03:26.189764Z"
+   checksum="4388a2c3b17dc6206081db12a58b3daa"
+   last-author="faro00oq"
+   kind="file"
+   revision="8"/>
+<entry
+   name="tasks"
+   kind="dir"/>
+<entry
+   name="lib"
+   kind="dir"/>
+<entry
+   committed-rev="7"
+   name="install.rb"
+   text-time="2006-12-11T15:45:11.390625Z"
+   committed-date="2006-12-11T15:48:44.938949Z"
+   checksum="2f961d8fb12ffd0a9860d568f951fd2b"
+   last-author="faro00oq"
+   kind="file"
+   revision="7"/>
+<entry
+   committed-rev="9"
+   name="MIT-LICENSE"
+   text-time="2006-12-15T06:33:53.640625Z"
+   committed-date="2006-12-15T06:44:05.836473Z"
+   checksum="48e84d84c3738b556d16ca59cc268ec4"
+   last-author="faro00oq"
+   kind="file"
+   revision="9"/>
+<entry
+   committed-rev="9"
+   name="README"
+   text-time="2006-12-15T06:38:09.546875Z"
+   committed-date="2006-12-15T06:44:05.836473Z"
+   checksum="c3d5cc18ce1ee738591fef379cfe734f"
+   last-author="faro00oq"
+   kind="file"
+   revision="9"/>
+</wc-entries>

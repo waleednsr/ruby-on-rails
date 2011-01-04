@@ -1,0 +1,62 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "Songs")}", mp3s_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_mp3_path %></li>
+    </ul>
+  </div>   
+  <div id="search">
+<% form_tag mp3s_path, :method=>'get' do%>
+	<p>
+ 	<%= text_field_tag :search, params[:search] %>
+	<%= submit_tag "search"%>
+	</p>
+	<% end %>    
+	</div>
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Mp3s</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+                    <th>
+            <%= t("activerecord.attributes.mp3.name", :default => t("activerecord.labels.name", :default => "Name")) %>
+          </th>
+                    <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @mp3s.each do |mp3| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= mp3.id %>
+          </td>
+                    <td>
+				
+            <%= link_to mp3.name, mp3_path(mp3) %>
+          </td>
+                    <td>
+            <%= mp3.created_at %>
+          </td>
+          <td class="last"> 
+            <%= link_to "#{t("web-app-theme.show", :default => "Details")}", mp3_path(mp3) %>  <a href="<%= mp3_path(mp3)%>"> <img src="/images/s1.jpg"></a> 
+            <% if can? :update, mp3 %>
+			|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_mp3_path(mp3) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", mp3_path(mp3), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          <% end %>
+		  </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        <% if !params[:search]%>
+        <%= will_paginate @mp3s  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

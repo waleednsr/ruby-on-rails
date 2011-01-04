@@ -1,0 +1,25 @@
+<p>
+  <b>Name:</b>
+  <%=h @video.name %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%=h @video.author %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%=h @video.duration %>
+</p>
+
+<p>
+  <b>Video:</b>
+  <%= @video.video.url%>
+  
+<%= player({:file =>'\public\system\videos\10\original.jpeg' },{:width => 640, :height => 480}) %>
+</p>
+
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>

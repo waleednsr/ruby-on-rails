@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2006-12-11T14:04:31.122612Z"
+   url="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr/assets/javascripts"
+   last-author="faro00oq"
+   kind="dir"
+   repos="svn+ssh://faro00oq@rubyforge.org/var/svn/flashplayrhelpr"
+   revision="3"/>
+<entry
+   committed-rev="3"
+   name="ufo.js"
+   text-time="2006-12-11T14:05:30.484375Z"
+   committed-date="2006-12-11T14:04:31.122612Z"
+   checksum="556d0863bd313727ff147d898d361676"
+   last-author="faro00oq"
+   kind="file"/>
+</wc-entries>

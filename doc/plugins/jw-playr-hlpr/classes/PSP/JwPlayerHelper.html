@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: PSP::JwPlayerHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">PSP::JwPlayerHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/jw-playr-hlpr/lib/jw_player_helper_rb.html">
+                vendor/plugins/jw-playr-hlpr/lib/jw_player_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000003">flashvars_params</a>&nbsp;&nbsp;
+      <a href="#M000004">options_for_swfobject</a>&nbsp;&nbsp;
+      <a href="#M000001">player</a>&nbsp;&nbsp;
+      <a href="#M000002">swfobject_params</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DEFAULT_FLASH_OPTIONS</td>
+          <td>=</td>
+          <td class="context-item-value">{                                 :player_id         =&gt; 'jw_player',                                 :id                =&gt; 'flash_player',                                 :allowfullscreen   =&gt; 'true',                                 :allowscriptaccess =&gt; 'true',                                 :play              =&gt; 'true',                                 :menu              =&gt; 'false',                                 :quality           =&gt; 'autohigh',                                 :scale             =&gt; 'default',                                 :width             =&gt; 400,                                 :height            =&gt; 300,                             } unless const_defined?('DEFAULT_FLASH_OPTIONS')</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">FLASH_REQUIRED_MESSAGE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;You must enable JavaScript and install the &lt;a href='http://www.flash.com'&gt;Flash&lt;/a&gt; plugin to view this player&quot; unless const_defined?('FLASH_REQUIRED_MESSAGE')</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="#M000001" class="method-signature">
+          <span class="method-name">player</span><span class="method-args">(player_options = {}, flash_options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+JW <a href="JwPlayerHelper.html#M000001">player</a> helper
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000001-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/jw-playr-hlpr/lib/jw_player_helper.rb, line 43</span>
+43:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">player</span>(<span class="ruby-identifier">player_options</span> = {}, <span class="ruby-identifier">flash_options</span> = {})
+44:       <span class="ruby-identifier">flash_options</span>   = <span class="ruby-constant">DEFAULT_FLASH_OPTIONS</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">flash_options</span>)
+45:       <span class="ruby-identifier">container</span>       = <span class="ruby-node">&quot;#{flash_options[:id]}_container&quot;</span>
+46:       <span class="ruby-identifier">msg</span>             = <span class="ruby-identifier">flash_options</span>[<span class="ruby-identifier">:flash_required_message</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-constant">FLASH_REQUIRED_MESSAGE</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">flash_options</span>[<span class="ruby-identifier">:flash_required_message</span>]
+47:       <span class="ruby-comment cmt">#if DEFAULT_SKIN defined then use that, otherwise look in player_options[:skin]. Don't specify if neither are set</span>
+48:       <span class="ruby-identifier">skin</span> = <span class="ruby-identifier">player_options</span>[<span class="ruby-identifier">:skin</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-value">? </span>(<span class="ruby-constant">PSP</span><span class="ruby-operator">::</span><span class="ruby-constant">JwPlayerHelper</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">'DEFAULT_SKIN'</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">DEFAULT_SKIN</span> <span class="ruby-operator">:</span> <span class="ruby-value str">''</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">player_options</span>[<span class="ruby-identifier">:skin</span>]
+49:       <span class="ruby-identifier">player_options</span>[<span class="ruby-identifier">:skin</span>] = <span class="ruby-node">&quot;/swf/skins/#{skin}.swf&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">skin</span>.<span class="ruby-identifier">blank?</span>
+50:       
+51:       <span class="ruby-identifier">js</span> = <span class="ruby-node">&quot;var swf_obj = new SWFObject('/swf/player.swf','#{flash_options[:player_id]}','#{flash_options[:width]}','#{flash_options[:height]}','9');&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+52:            <span class="ruby-identifier">options_for_swfobject</span>(<span class="ruby-identifier">container</span>, <span class="ruby-identifier">flash_options</span>, <span class="ruby-identifier">player_options</span>)
+53: 
+54:       <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">'div'</span>, <span class="ruby-identifier">msg</span> , <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">container</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">javascript_tag</span>(<span class="ruby-identifier">js</span>)
+55:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">flashvars_params</span><span class="method-args">(options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/jw-playr-hlpr/lib/jw_player_helper.rb, line 63</span>
+63:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">flashvars_params</span>(<span class="ruby-identifier">options</span>)
+64:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{k.to_s}=#{CGI::escape(v.to_s)}&quot;</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'&amp;'</span>)
+65:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">options_for_swfobject</span><span class="method-args">(dom_id, flash_options, player_options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/jw-playr-hlpr/lib/jw_player_helper.rb, line 67</span>
+67:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">options_for_swfobject</span>(<span class="ruby-identifier">dom_id</span>, <span class="ruby-identifier">flash_options</span>, <span class="ruby-identifier">player_options</span>)
+68:       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">flash_options</span>.<span class="ruby-identifier">dup</span>
+69:       [<span class="ruby-identifier">:id</span>, <span class="ruby-identifier">:player_id</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)}
+70:       <span class="ruby-comment cmt">#flashvars first</span>
+71:       <span class="ruby-identifier">flashvars</span>    = <span class="ruby-identifier">flashvars_params</span>(<span class="ruby-identifier">player_options</span>)
+72:       <span class="ruby-comment cmt">#finally swf params, including the constructed flashvars</span>
+73:       <span class="ruby-identifier">flash_script</span> = <span class="ruby-identifier">swfobject_params</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>({<span class="ruby-identifier">:flashvars</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">flashvars</span>}))
+74:       <span class="ruby-identifier">flash_script</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;;swf_obj.write('#{dom_id}');&quot;</span>
+75:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="#M000002" class="method-signature">
+          <span class="method-name">swfobject_params</span><span class="method-args">(options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/jw-playr-hlpr/lib/jw_player_helper.rb, line 59</span>
+59:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">swfobject_params</span>(<span class="ruby-identifier">options</span>)
+60:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;swf_obj.addParam('#{k.to_s}','#{v.to_s}')&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'; '</span>)
+61:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

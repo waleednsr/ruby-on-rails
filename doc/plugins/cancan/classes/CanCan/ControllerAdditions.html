@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: CanCan::ControllerAdditions</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">CanCan::ControllerAdditions</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/cancan/lib/cancan/controller_additions_rb.html">
+                vendor/plugins/cancan/lib/cancan/controller_additions.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This module is automatically <a
+href="ControllerAdditions.html#M000016">included</a> into all controllers.
+It also makes the &quot;<a
+href="ControllerAdditions.html#M000020">can?</a>&quot; and &quot;<a
+href="ControllerAdditions.html#M000021">cannot?</a>&quot; methods available
+to all views.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000017">authorize!</a>&nbsp;&nbsp;
+      <a href="#M000020">can?</a>&nbsp;&nbsp;
+      <a href="#M000021">cannot?</a>&nbsp;&nbsp;
+      <a href="#M000019">current_ability</a>&nbsp;&nbsp;
+      <a href="#M000016">included</a>&nbsp;&nbsp;
+      <a href="#M000018">unauthorized!</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="ControllerAdditions/ClassMethods.html" class="link">CanCan::ControllerAdditions::ClassMethods</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="#M000016" class="method-signature">
+          <span class="method-name">included</span><span class="method-args">(base)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000016-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/controller_additions.rb, line 214</span>
+214:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+215:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">ClassMethods</span>
+216:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">helper_method</span> <span class="ruby-identifier">:can?</span>, <span class="ruby-identifier">:cannot?</span>
+217:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="#M000017" class="method-signature">
+          <span class="method-name">authorize!</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Raises a <a href="AccessDenied.html">CanCan::AccessDenied</a> exception if
+the <a href="ControllerAdditions.html#M000019">current_ability</a> cannot
+perform the given action. This is usually called in a controller action or
+before filter to perform the authorization.
+</p>
+<pre>
+  def show
+    @article = Article.find(params[:id])
+    authorize! :read, @article
+  end
+</pre>
+<p>
+A :message option can be passed to specify a different message.
+</p>
+<pre>
+  authorize! :read, @article, :message =&gt; &quot;Not authorized to read #{@article.name}&quot;
+</pre>
+<p>
+You can also use I18n to customize the message. Action aliases defined in
+<a href="Ability.html">Ability</a> work here.
+</p>
+<pre>
+  en:
+    unauthorized:
+      manage:
+        all: &quot;Not authorized to %{action} %{subject}.&quot;
+        user: &quot;Not allowed to manage other user accounts.&quot;
+      update:
+        project: &quot;Not allowed to update this project.&quot;
+</pre>
+<p>
+You can rescue from the exception in the controller to customize how
+unauthorized access is displayed to the user.
+</p>
+<pre>
+  class ApplicationController &lt; ActionController::Base
+    rescue_from CanCan::AccessDenied do |exception|
+      flash[:error] = exception.message
+      redirect_to root_url
+    end
+  end
+</pre>
+<p>
+See the <a href="AccessDenied.html">CanCan::AccessDenied</a> exception for
+more details on working with the exception.
+</p>
+<p>
+See the load_and_authorize_resource method to automatically add the <a
+href="ControllerAdditions.html#M000017">authorize!</a> behavior to the
+default RESTful actions.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000017-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/controller_additions.rb, line 256</span>
+256:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">authorize!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+257:       <span class="ruby-ivar">@_authorized</span> = <span class="ruby-keyword kw">true</span>
+258:       <span class="ruby-identifier">current_ability</span>.<span class="ruby-identifier">authorize!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+259:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="#M000020" class="method-signature">
+          <span class="method-name">can?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use in the controller or view to check the user&#8216;s permission for a
+given action and object.
+</p>
+<pre>
+  can? :destroy, @project
+</pre>
+<p>
+You can also pass the class instead of an instance (if you don&#8216;t have
+one handy).
+</p>
+<pre>
+  &lt;% if can? :create, Project %&gt;
+    &lt;%= link_to &quot;New Project&quot;, new_project_path %&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+If it&#8216;s a nested resource, you can pass the parent instance in a
+hash. This way it will check conditions which reach through that
+association.
+</p>
+<pre>
+  &lt;% if can? :create, @category =&gt; Project %&gt;
+    &lt;%= link_to &quot;New Project&quot;, new_project_path %&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+This simply calls &quot;<a
+href="ControllerAdditions.html#M000020">can?</a>&quot; on the <a
+href="ControllerAdditions.html#M000019">current_ability</a>. See <a
+href="Ability.html#M000003">Ability#can</a>?.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000020-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/controller_additions.rb, line 299</span>
+299:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">can?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+300:       <span class="ruby-identifier">current_ability</span>.<span class="ruby-identifier">can?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+301:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="#M000021" class="method-signature">
+          <span class="method-name">cannot?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Convenience method which works the same as &quot;<a
+href="ControllerAdditions.html#M000020">can?</a>&quot; but returns the
+opposite value.
+</p>
+<pre>
+  cannot? :destroy, @project
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000021-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/controller_additions.rb, line 307</span>
+307:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cannot?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+308:       <span class="ruby-identifier">current_ability</span>.<span class="ruby-identifier">cannot?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+309:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="#M000019" class="method-signature">
+          <span class="method-name">current_ability</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates and returns the current user&#8216;s ability and caches it. If you
+want to override how the <a href="Ability.html">Ability</a> is defined then
+this is the place. Just define the method in the controller to change
+behavior.
+</p>
+<pre>
+  def current_ability
+    # instead of Ability.new(current_user)
+    @current_ability ||= UserAbility.new(current_account)
+  end
+</pre>
+<p>
+Notice it is important to cache the ability object so it is not recreated
+every time.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000019-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/controller_additions.rb, line 276</span>
+276:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_ability</span>
+277:       <span class="ruby-ivar">@current_ability</span> <span class="ruby-operator">||=</span> <span class="ruby-operator">::</span><span class="ruby-constant">Ability</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">current_user</span>)
+278:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="#M000018" class="method-signature">
+          <span class="method-name">unauthorized!</span><span class="method-args">(message = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000018-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/cancan/lib/cancan/controller_additions.rb, line 261</span>
+261:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unauthorized!</span>(<span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>)
+262:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ImplementationRemoved</span>, <span class="ruby-value str">&quot;The unauthorized! method has been removed from CanCan, use authorize! instead.&quot;</span>
+263:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

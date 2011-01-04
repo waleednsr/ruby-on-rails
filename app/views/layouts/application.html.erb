@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<img src="/images/1.jpg" height="200" width="1000">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Ruby on Rails</title>
+  <%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/Orange/style", :cache => true %>
+
+ #<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application" %>  
+ # <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>  
+#  <%= javascript_include_tag 'jquery.jshowoff.min.js', 'jquery.jshowoff.js'%>
+ 
+  <%= ajaxful_rating_style %>
+  <%= javascript_include_tag :defaults%>
+ 
+  <%= stylesheet_link_tag 'widgEditor' %>
+  <%= javascript_include_tag "widgEditor" %>
+
+  
+  </head>
+<body>  
+    <div id="user-nav">
+       
+  <% if logged_in? -%>
+  <div id="user-bar-greeting">Logged in as <%= link_to_current_user :content_method => :login %></div>
+  <div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div>
+<% else -%>
+  <div id="user-bar-greeting"><%= link_to_login_with_IP 'Not logged in', :style => 'border: none;' %></div>
+  <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> /
+                               <%= link_to "Sign up", signup_path, { :title => "Create an account" } %></div>
+<% end -%>   
+</div>
+  <div id="container">
+    <div id="header">
+      <h1><a href="/">Ruby on Rails</a></h1>
+
+      <div id="main-navigation">
+        <ul class="wat-cf"></ul>
+      </div>
+    </div>    
+    <div id="wrapper" class="wat-cf">
+      <div class="flash">
+        <% flash.each do |type, message| -%>
+          <div class="message <%= type %>">
+            <p><%= message %></p>
+          </div>
+        <% end -%>
+      </div>
+      <div id="main">
+        <%= yield %>
+        <div id="footer">
+          <div class="block">
+            <p>Copyright &copy; <%= Time.now.year %> Ruby on Rails.</p>
+          </div>      
+        </div>
+      </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>
